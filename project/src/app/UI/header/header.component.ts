@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.connectServer();
     this.initDevice();
     this.initMenu();
   }
@@ -64,6 +65,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } else {
       this.nav.nativeElement.classList.remove('white');
     }
+  }
+
+  connectServer (): void {
+    this.http.herokuWakeUp().pipe(takeUntil(this.destroy)).subscribe(data => {
+      console.log(data.message);
+    }, err => {
+      console.log(err);
+    });
   }
 
   ngOnDestroy(): void {

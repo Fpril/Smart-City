@@ -7,17 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
 
-  private configUrl: string = 'assets/config/';
-  private apiUrl: string = 'http://localhost:8080/';
+  private localUrl: string = 'assets/';
+  private apiUrl: string = 'https://polar-headland-79210.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 
   public getMenu (): Observable<any> {
-    return this.http.get(`${this.configUrl}menu.json`)
+    return this.http.get(`${this.localUrl}config/menu.json`)
   }
 
   public getContent (): Observable<any> {
-    return this.http.get(`${this.configUrl}info.json`)
+    return this.http.get(`${this.localUrl}config/info.json`)
   }
 
   public getCars (): Observable<any> {
@@ -26,5 +26,13 @@ export class HttpService {
 
   public createOrder (order): Observable<any> {
     return this.http.post(`${this.apiUrl}order/create`, {order: order})
+  }
+
+  public herokuWakeUp (): Observable<any> {
+    return this.http.get(`${this.apiUrl}`)
+  }
+
+  public getParkings (): Observable<any> {
+    return this.http.get(`${this.localUrl}data/parking.xlsx`, { responseType: 'blob' })
   }
 }
