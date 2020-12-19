@@ -74,6 +74,7 @@
                 font-size: 1.3em;
                 color: #fff;
                 font-weight: 300;
+                margin: 5px 0;
             }
 
             a {
@@ -90,6 +91,100 @@
                 font-weight: 500;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             }
+        }
+    }
+}
+
+.wrapper.blur {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.popup {
+    overflow: hidden;
+    img {
+        position: absolute;
+        width: 20px;
+        cursor: pointer;
+        top: 20px;
+        right: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.button {
+    position: relative;
+    padding: 20px 40px;
+    display: block;
+    width: 300px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    cursor: pointer;
+
+    span {
+        position: relative;
+        z-index: 1;
+        color: #ffffff;
+        font-size: 20px;
+        letter-spacing: 8px;
+    }
+
+    .liquid {
+        position: absolute;
+        left: 0;
+        top: -120px;
+        width: 300px;
+        height: 300px;
+        background: #4973ff;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        transition: 0.5s;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #000000;
+        }
+
+        &::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: wave 5s linear infinite;
+        }
+
+        &::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, 0.5);
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
+            }
+        
+            100% {
+                transform: translate(-50%, -75%) rotate(360deg);
+            }
+        }
+    }
+
+    &:hover {
+        .liquid {
+            top: -180px;
         }
     }
 }

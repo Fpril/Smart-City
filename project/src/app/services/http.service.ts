@@ -23,4 +23,8 @@ export class HttpService {
   public getCars (): Observable<any> {
     return this.http.get(`${this.apiUrl}car/read`)
   }
+
+  public createOrder (order): Observable<any> {
+    return this.http.post(`${this.apiUrl}order/create`, {order: order})
+  }
 }
