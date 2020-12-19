@@ -1,7 +1,7 @@
 <header class="header">
     <div class="container">
        <div class="header__row">
-           <nav class="header__menu menu">
+           <nav class="header__menu menu" #nav>
                <div class="menu__icon icon-menu" [ngClass]="isActive ? 'active' : ''" (click)="toggleActiveClass()">
                    <span></span>
                    <span></span>
@@ -10,7 +10,7 @@
                <div class="menu__body" [ngClass]="isActive ? 'active' : ''">
                     <ul class="menu__list">
                         <li *ngFor="let obj of menu">
-                            <a routerLink={{obj.link}} class="menu__link" *ngIf="!obj.subparagraphs[0] else subMenu">{{obj.name}}</a>
+                            <a routerLink={{obj.link}} class="menu__link" (click)="toggleMenu(obj.name)" *ngIf="!obj.subparagraphs[0] else subMenu">{{obj.name}}</a>
                             <ng-template #subMenu>
                                 <span class="menu__link">{{obj.name}}</span>
                                 <span class="menu__arrow arrow" (click)="toggleSubMenu($event.target)"></span>

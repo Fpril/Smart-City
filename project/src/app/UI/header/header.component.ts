@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  @ViewChild('nav', {static: false}) nav: ElementRef;
   private destroy: ReplaySubject<any> = new ReplaySubject<any>(1);
   menu: Array<any>;
   isActive: boolean = true;
@@ -55,6 +56,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const subMenu = arrow.nextElementSibling;
     subMenu.classList.toggle('open');
     arrow.classList.toggle('active');
+  }
+
+  toggleMenu (name): void {
+    if (name != "Головна сторінка") {
+      this.nav.nativeElement.classList.add('white');
+    } else {
+      this.nav.nativeElement.classList.remove('white');
+    }
   }
 
   ngOnDestroy(): void {

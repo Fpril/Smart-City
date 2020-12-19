@@ -34,10 +34,12 @@ section {
 html,
 body {
     min-height: 100%;
-    background: #1D976C;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #fff
+    background: #000000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    text-rendering: optimizeLegibility;
+    font-family: "-apple-system", BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 body {

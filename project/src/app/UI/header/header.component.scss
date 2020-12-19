@@ -102,6 +102,20 @@
     }
 }
 
+.menu.white {
+    .menu__list {
+        >li {
+            &:after {
+                background-color: #ffffff;
+            }
+        }
+    }
+
+    .menu__link {
+        color: #ffffff;
+    }
+}
+
 .sub-menu {
     &__list {
         display: none;
