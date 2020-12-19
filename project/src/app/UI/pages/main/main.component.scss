@@ -1,0 +1,95 @@
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+
+    .imgBx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: 0.5s;
+            background-position: center;
+        }
+
+        img.active {
+            opacity: 1;
+        }
+    }
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 80px;
+
+    li {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+            background: #ffeb3b;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-left: 3px solid #111;
+            border-bottom: 3px solid #111;
+            transform: rotate(45deg);
+        }
+
+        &:nth-child(2)::before {
+            transform: rotate(225deg);
+        }
+    }
+}
+
+.contentBx {
+    position: absolute;
+    bottom: 1px;
+    max-width: 700px;
+
+    div {
+        display: none;
+    }
+
+    div.active {
+        display: block;
+        padding-left: 30px;
+        padding-left: 100px;
+        background: rgba(255, 255, 255, 0.5);
+
+        h2 {
+            color: #303030;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        p {
+            color: #303030;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+    }
+}

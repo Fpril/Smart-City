@@ -15,6 +15,10 @@ export class HttpService {
     return this.http.get(`${this.configUrl}menu.json`)
   }
 
+  public getContent (): Observable<any> {
+    return this.http.get(`${this.configUrl}info.json`)
+  }
+
   // public getCurrentLocation (): Observable<any> {
   //   return this.http.get(this.gpsUrl)
   // }

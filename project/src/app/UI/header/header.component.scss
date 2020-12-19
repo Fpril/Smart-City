@@ -1,7 +1,7 @@
 @import "../styles/mixins.scss";
 
 .header {
-    position: relative;
+    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@
         }
 
         >li {
-            padding: 0px 20px;
+            padding: 0px 15px;
 
             &:after {
                 content: '';
@@ -50,8 +50,8 @@
 
     &__link {
         cursor: pointer;
-        color: #303030;
-        font-size: 13px;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 15px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2.6px;

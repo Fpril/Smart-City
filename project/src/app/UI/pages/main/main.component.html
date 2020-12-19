@@ -1,0 +1,19 @@
+<section class="banner">
+    <div class="imgBx" #imgBx>
+        <img src="../../../../assets/images/slide1.jpg" class="active" alt="">
+        <img src="../../../../assets/images/slide2.jpg" alt="">
+        <img src="../../../../assets//images/slide3.jpg" alt="">
+    </div>
+
+    <div class="contentBx" #contentBx>
+        <div *ngFor="let obj of content; let i = index" [ngClass]="i == 0 ? 'active' : ''">
+            <h2>{{obj.title}}</h2>
+            <p>{{obj.content}}</p>
+        </div>
+    </div>
+
+    <ul class="controls">
+        <li (click)="prevSlide()"></li>
+        <li (click)="nextSlide()"></li>
+    </ul>
+</section>
