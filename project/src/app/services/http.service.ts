@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class HttpService {
 
   private configUrl: string = 'assets/config/';
+  private apiUrl: string = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +20,7 @@ export class HttpService {
     return this.http.get(`${this.configUrl}info.json`)
   }
 
-  // public getCurrentLocation (): Observable<any> {
-  //   return this.http.get(this.gpsUrl)
-  // }
+  public getCars (): Observable<any> {
+    return this.http.get(`${this.apiUrl}car/read`)
+  }
 }

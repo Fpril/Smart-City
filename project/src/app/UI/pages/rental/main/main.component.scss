@@ -1,4 +1,5 @@
 .wrapper {
+    padding-top: 50px;
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -57,15 +58,37 @@
             text-align: center;
             transition: 0.5s;
 
-            h2 {
-                position: absolute;
-                font-family: 'Poppins', sans-serif;
-                top: -10px;
-                right: 30px;
-                font-size: 10em;
+            img {
+                width: 250px;
+                border-radius: 15px;
+            }
+
+            h3 {
+                font-size: 3em;
                 font-weight: 700;
-                color: rgba(255, 255, 255, 0.05);
-                pointer-events: none;
+                color: #fff;
+                z-index: 1;
+            }
+
+            p {
+                font-size: 1.3em;
+                color: #fff;
+                font-weight: 300;
+            }
+
+            a {
+                font-size: 20px;
+                position: relative;
+                display: inline-block;
+                padding: 8px 20px;
+                margin-top: 15px;
+                background: #fff;
+                color: #000;
+                border-radius: 20px;
+                cursor: pointer;
+                text-decoration: none;
+                font-weight: 500;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             }
         }
     }
