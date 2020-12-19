@@ -17,7 +17,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren('allCards') allCards: QueryList<any>;
   @ViewChild('wrapper', {static: false}) wrapper: ElementRef;
   @ViewChild('popup', {static: false}) popup: ElementRef;
-  @ViewChild('error', {static: false}) error: ElementRef;
+  @ViewChild('message', {static: false}) message: ElementRef;
   currentId: string;
   orderForm: FormGroup;
 
@@ -77,9 +77,30 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   makeAnOrder (): void {
     if (this.orderForm.valid) {
-      console.log(1)
+      this.message.nativeElement.innerHTML = '';
+      const order = {
+        name: this.orderForm.get('name').value,
+        phone: this.orderForm.get('phone').value,
+        carId: this.currentId
+      }
+      this.http.createOrder(order).pipe(takeUntil(this.destroy)).subscribe(data => {
+        if (data.message) {
+          this.message.nativeElement.classList.remove('error');
+          this.message.nativeElement.classList.add('success');
+          this.message.nativeElement.innerHTML = 'Ваше замовлення оформлено, чекайте дзвінка!';
+        } else {
+          this.message.nativeElement.classList.remove('success');
+          this.message.nativeElement.classList.add('error');
+          this.message.nativeElement.innerHTML = 'Ви вже оформили замовлення!';
+        }
+      }, err => {
+        console.log(err);
+      });
+      
     } else {
-      this.error.nativeElement.innerHtml = `Заповніть усі поля!`;
+      this.message.nativeElement.classList.remove('success');
+      this.message.nativeElement.classList.add('error');
+      this.message.nativeElement.innerHTML = 'Заповніть усі поля!';
     }
   }
 }

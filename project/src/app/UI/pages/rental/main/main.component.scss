@@ -117,10 +117,22 @@
         justify-content: center;
         align-items: center;
     }
+
+    .error,
+    .success {
+        font-size: 16px;
+        height: 16px;
+        color: rgb(197, 58, 58);
+    }
+
+    .success {
+        color: rgb(96, 190, 58);
+    }
 }
 
 .button {
     position: relative;
+    margin: 20px 0 0 0;
     padding: 20px 40px;
     display: block;
     width: 300px;
