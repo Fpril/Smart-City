@@ -15,12 +15,12 @@ export class MainComponent implements OnInit {
   parkings: Array<any>;
   @ViewChild("gmap", {static: true}) gmapElement: ElementRef;
   map: google.maps.Map;
-  markers: Array<google.maps.Marker> = [];
+  markers: google.maps.Marker[] = [];
+  placeService: google.maps.places.PlacesService;
 
   constructor(private http: HttpService) { }
 
   ngOnInit(): void {
-    this.initParkings();
     this.initMap();
   }
 
@@ -34,36 +34,63 @@ export class MainComponent implements OnInit {
 
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
     google.maps.event.addListener(this.map, 'click', event => this.placeMarker(event.latLng));
+    
+    const request = {
+      location: Lviv,
+      radius: 20000,
+      type: 'parking'
+    }
+
+    this.placeService = new google.maps.places.PlacesService(this.map);
+    this.placeService.nearbySearch(request, (results, status) => {
+      results.forEach(result => {
+        this.placeMarker(result.geometry.location, result.name);
+      })
+    });
   }
 
-  private placeMarker (location) {
+  private placeMarker (location, name) {
     const marker = new google.maps.Marker({
       position: location,
-      map: this.map
+      map: this.map,
+      title: name ? name : ''
     });
     this.markers.push(marker);
-    console.log(this.markers)
   }
 
-  private initParkings (): void {
-    this.http.getParkings().pipe(takeUntil(this.destroy)).subscribe(data => {
-      const reader = new FileReader();
+  // private initParkings (): void {
+  //   this.http.getParkings().pipe(takeUntil(this.destroy)).subscribe(data => {
+  //     const reader = new FileReader();
       
-      reader.onload = e => {
-        const data = reader.result;
-        const excelData = XLSX.read(data, { type: 'binary'});
-        const jsonData: any = excelData.SheetNames.reduce((initial, name) => {
-          const sheet = excelData.Sheets[name];
-          initial[name] = XLSX.utils.sheet_to_json(sheet);
-          return initial;
-        }, {});
-        this.parkings = jsonData.Sheet2.filter(parking => parking.parking_places_amount >= 20);
-      }
+  //     reader.onload = async e => {
+  //       const data = reader.result;
+  //       const excelData = XLSX.read(data, { type: 'binary'});
+  //       const jsonData: any = excelData.SheetNames.reduce((initial, name) => {
+  //         const sheet = excelData.Sheets[name];
+  //         initial[name] = XLSX.utils.sheet_to_json(sheet);
+  //         return initial;
+  //       }, {});
+  //       this.parkings = jsonData.Sheet2.filter(parking => parking.parking_places_amount >= 5 && parking.parking_type === 'загального користування');
+  //       this.placeService = new google.maps.places.PlacesService(this.map);
+  //       for (let parking of this.parkings) {
+  //         const query = `${parking.type} ${parking.parking_area_address} ${parking.parking_area_address_building ? parking.parking_area_address_building : ''}`;
+  //         const request = {
+  //           query: query
+  //         }
+  //         console.log(request)
+  //         await this.placeService.textSearch(request, (results, status) => {
+  //           console.log(results)
+  //           if (status === google.maps.places.PlacesServiceStatus.OK) {
+  //             this.placeMarker(results[0].geometry.location);
+  //           }
+  //         });
+  //       }
+  //     }
 
-      reader.readAsBinaryString(data);
-    }, err => {
-      console.log(err);
-    })
-  }
+  //     reader.readAsBinaryString(data);
+  //   }, err => {
+  //     console.log(err);
+  //   })
+  // }
 
 }
