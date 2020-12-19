@@ -1,0 +1,24 @@
+{
+    "menu": [
+        {
+            "name": "Головна сторінка",
+            "link": "",
+            "subparagraphs": []
+        },
+        {
+            "name": "Оренда транспорту",
+            "link": "rental",
+            "subparagraphs": []
+        },
+        {
+            "name": "Паркування",
+            "link": "parking",
+            "subparagraphs": []
+        },
+        {
+            "name": "Маршрути громадського транспорту",
+            "link": "routes",
+            "subparagraphs": []
+        }
+    ]
+}

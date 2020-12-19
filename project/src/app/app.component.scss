@@ -1,0 +1,16 @@
+@import "./UI/styles/mixins.scss";
+
+.wrapper {
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    @include flexbox();
+    flex-direction: column;
+}

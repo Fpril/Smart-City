@@ -15,15 +15,20 @@ export class MainComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   ngOnInit(): void {
-    this.getCurrentLocation();
+    // this.getCurrentLocation();
   }
 
-  getCurrentLocation () {
-    this.http.getCurrentLocation().pipe(takeUntil(this.destroy)).subscribe(data => {
-      console.log(data);
-    }, err => {
-      console.log(err);
-    })
+  // getCurrentLocation () {
+  //   this.http.getCurrentLocation().pipe(takeUntil(this.destroy)).subscribe(data => {
+  //     console.log(data);
+  //   }, err => {
+  //     console.log(err);
+  //   })
+  // }
+
+  ngOnDestroy(): void {
+    this.destroy.next(null);
+    this.destroy.complete();
   }
 
 }

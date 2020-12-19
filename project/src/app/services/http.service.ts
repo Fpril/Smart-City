@@ -7,11 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
 
-  private gpsUrl: string = "http://track.ua-gis.com/gtfs/lviv/vehicle_position";
+  private configUrl: string = 'assets/config/';
 
   constructor(private http: HttpClient) { }
 
-  public getCurrentLocation (): Observable<any> {
-    return this.http.get(this.gpsUrl)
+  public getMenu (): Observable<any> {
+    return this.http.get(`${this.configUrl}menu.json`)
   }
+
+  // public getCurrentLocation (): Observable<any> {
+  //   return this.http.get(this.gpsUrl)
+  // }
 }
