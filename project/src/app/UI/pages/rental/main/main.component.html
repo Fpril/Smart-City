@@ -22,9 +22,13 @@
             <input type="text" formControlName="phone" id="phone" required>
             <label for="phone">Номер телефону</label>
         </div>
+        <div class="group">
+            <input type="number" formControlName="days" id="days" required>
+            <label for="days">Кількість днів</label>
+        </div>
         <div class="error" #message></div>
         <a class="button" (click)="makeAnOrder()">
-            <span>Розрахувати</span>
+            <span>Замовити</span>
             <div class="liquid"></div>
         </a>
     </form>

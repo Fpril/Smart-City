@@ -43,7 +43,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
   private initForm (): void {
     this.orderForm = this.fb.group({
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required]]
+      phone: ['', [Validators.required]],
+      days: ['', [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -81,6 +82,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
       const order = {
         name: this.orderForm.get('name').value,
         phone: this.orderForm.get('phone').value,
+        days: this.orderForm.get('days').value,
         carId: this.currentId
       }
       this.http.createOrder(order).pipe(takeUntil(this.destroy)).subscribe(data => {
