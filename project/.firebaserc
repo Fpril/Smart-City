@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "smart-city-e00a8": {
+      "hosting": {
+        "project": [
+          "smart-city-e00a8"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "smart-city-e00a8"
+  },
+  "hosting": [{
+    "target": "smart-city-e00a8",
+    "public": "./dist./project/index.html"
+  }]
+}

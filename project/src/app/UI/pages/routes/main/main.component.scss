@@ -17,6 +17,12 @@
     justify-content: center;
     align-items: center;
     margin: 0 0 20px 0;
+
+    @media screen and (max-width: 400px) {
+        & {
+            flex-direction: column;
+        }
+    }
 }
 
 .center {

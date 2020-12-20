@@ -136,6 +136,12 @@ h1,h2,h3,h4,h5,h6 {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 400px) {
+        & {
+            width: 350px;
+        }
+    }
 }
    
 .popup.active {
