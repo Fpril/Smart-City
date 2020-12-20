@@ -156,7 +156,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.directionsService.route(request, (result, status) => {
       if (status == 'OK') {
-        console.log(result)
         this.directionsRenderer.setDirections(result);
         this.toggle();
       }

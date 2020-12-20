@@ -177,9 +177,8 @@ export class MainComponent implements OnInit {
     if (this.showTrafic) {
       this.trafficLayer.setMap(this.map);
     } else {
-      this.directionsRenderer = new google.maps.DirectionsRenderer();
-      this.map = new google.maps.Map(this.gmapElement.nativeElement, this.mapProp);
-      this.directionsRenderer.setMap(this.map);
+      this.markers.splice(0, this.markers.length);
+      this.initMap();
     }
   }
 
