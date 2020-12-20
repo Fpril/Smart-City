@@ -15,7 +15,10 @@ export class MainComponent implements OnInit {
   @ViewChild("gmap", {static: true}) gmapElement: ElementRef;
   map: google.maps.Map;
   markers: google.maps.Marker[] = [];
+  currentLocation: google.maps.LatLng;
   placeService: google.maps.places.PlacesService;
+  directionsService: google.maps.DirectionsService;
+  directionsRenderer: google.maps.DirectionsRenderer;
   Lviv: google.maps.LatLng = new google.maps.LatLng(49.839684, 24.029716);
   showTrafic: boolean = false;
   trafficLayer: google.maps.TrafficLayer = new google.maps.TrafficLayer();
@@ -108,13 +111,17 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
+    this.getCurrentLocation();
   }
 
   private initMap (): void {
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsRenderer = new google.maps.DirectionsRenderer();
     this.map = new google.maps.Map(this.gmapElement.nativeElement, this.mapProp);
     const request = {
       query: 'Парковка у Львові'
-    }
+    };
+    this.directionsRenderer.setMap(this.map);
     this.placeService = new google.maps.places.PlacesService(this.map);
     this.placeService.textSearch(request, (results, status) => {
       results.forEach(result => {
@@ -129,7 +136,40 @@ export class MainComponent implements OnInit {
       map: this.map,
       title: name ? name : ''
     });
+    marker.addListener('click', e => {
+      const origin = this.currentLocation;
+      const destination = marker.getPosition() as google.maps.LatLng;
+
+      const request: google.maps.DirectionsRequest = {
+        origin: origin,
+        destination: destination,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        travelMode: google.maps.TravelMode.DRIVING,
+        provideRouteAlternatives: true
+      }
+
+      this.directionsService.route(request, (result, status) => {
+        if (status == 'OK') {
+          this.directionsRenderer.setDirections(result);
+        }
+      });
+    });
     this.markers.push(marker);
+  }
+
+  private getCurrentLocation (): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        this.map.setCenter(this.currentLocation);
+        const marker = new google.maps.Marker({
+          position: this.currentLocation,
+          map: this.map,
+          title: 'Моя геолокація',
+          animation: google.maps.Animation.BOUNCE
+        });
+      });
+    }
   }
 
   toggleMode (): void {
@@ -137,7 +177,9 @@ export class MainComponent implements OnInit {
     if (this.showTrafic) {
       this.trafficLayer.setMap(this.map);
     } else {
+      this.directionsRenderer = new google.maps.DirectionsRenderer();
       this.map = new google.maps.Map(this.gmapElement.nativeElement, this.mapProp);
+      this.directionsRenderer.setMap(this.map);
     }
   }
 
