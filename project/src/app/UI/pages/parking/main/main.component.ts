@@ -179,6 +179,7 @@ export class MainComponent implements OnInit {
     } else {
       this.markers.splice(0, this.markers.length);
       this.initMap();
+      this.getCurrentLocation();
     }
   }
 
