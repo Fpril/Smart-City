@@ -32,7 +32,7 @@ export class HttpService {
     return this.http.get(`${this.apiUrl}`)
   }
 
-  public getParkings (): Observable<any> {
-    return this.http.get(`${this.localUrl}data/parking.xlsx`, { responseType: 'blob' })
+  public getRoutes (): Observable<any> {
+    return this.http.get(`${this.localUrl}data/routes.xlsx`, { responseType: 'blob' })
   }
 }

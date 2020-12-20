@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-main',

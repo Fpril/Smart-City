@@ -6,9 +6,22 @@
     flex-direction: column;
 }
 
+.container.blur {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
 .center {
     position: relative;
-    top: 10px;
+    top: 30px;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
     perspective: 200px;
@@ -96,4 +109,180 @@ input:checked ~ span:nth-child(2)::before {
 
 input:checked ~ span:nth-child(3)::before {
     transform: rotateY(360deg);
+}
+
+.button {
+    position: relative;
+    margin: 20px 0 0 0;
+    padding: 20px 40px;
+    display: block;
+    width: 300px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    cursor: pointer;
+
+    span {
+        position: relative;
+        z-index: 1;
+        color: #ffffff;
+        font-size: 20px;
+        letter-spacing: 8px;
+    }
+
+    .liquid {
+        position: absolute;
+        left: 0;
+        top: -120px;
+        width: 300px;
+        height: 300px;
+        background: #4973ff;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        transition: 0.5s;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #000000;
+        }
+
+        &::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: wave 5s linear infinite;
+        }
+
+        &::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, 0.5);
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
+            }
+        
+            100% {
+                transform: translate(-50%, -75%) rotate(360deg);
+            }
+        }
+    }
+
+    &:hover {
+        .liquid {
+            top: -180px;
+        }
+    }
+}
+
+.popup {
+    img {
+        position: absolute;
+        width: 20px;
+        cursor: pointer;
+        top: 20px;
+        right: 20px;
+    }
+}
+
+.responsive-table {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2px;
+    li {
+      border-radius: 3px;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .table-header {
+      background-color: #95A5A6;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .table-row {
+      background-color: #ffffff;
+      box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+      font-weight: 500;
+    }
+    .col-1 {
+      flex-basis: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .col-2 {
+      flex-basis: 50%;
+    }
+    .col {
+        color: #000;
+    }
+    
+    @media all and (max-width: 767px) {
+      .table-header {
+        display: none;
+      }
+      .table-row{
+        
+      }
+      li {
+        display: block;
+      }
+      .col {
+        
+        flex-basis: 100%;
+        
+      }
+      .col {
+        display: flex;
+        padding: 10px 0;
+        &:before {
+          color: #6C7A89;
+          padding-right: 10px;
+          content: attr(data-label);
+          flex-basis: 50%;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+.routeButton {
+    position: relative;
+    display: inline-block;
+    padding: 12px 36px;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #755bea, #ff72c0);    
+}
+
+@keyframes animate {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+    
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
 }
